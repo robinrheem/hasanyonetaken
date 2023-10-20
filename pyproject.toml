@@ -10,6 +10,7 @@ readme = "README.md"
 python = "^3.11"
 django = "^4.2.6"
 python-decouple = "^3.8"
+requests-html = "^0.10.0"
 
 
 [build-system]
