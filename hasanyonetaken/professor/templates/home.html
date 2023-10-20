@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Has Anyone Taken | Home{% endblock %}
+
+{% block content %}
+<div class="grid">
+    <form method="POST" action="POST">
+        <div class="grid">
+            <label for="professorname">
+            <h1>Has anyone taken</h1>
+            <input type="search" id="professorname" name="professorname" placeholder="Roderic Taylor" required>
+            </label>
+        </div>
+    </form>
+</div>
+{% endblock %}
