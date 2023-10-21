@@ -13,7 +13,8 @@ def search(request):
     mean_difficulty = professor.reviews.aggregate(Avg("difficulty"))["difficulty__avg"]
     context = {
         "professor": professor,
-        "reviews": professor.reviews.all(),
+        "good_reviews": professor.reviews.filter(rating__gte=3.0),
+        "bad_reviews": professor.reviews.filter(rating__lte=2.0),
         "mean_rating": mean_rating,
         "mean_difficulty": mean_difficulty,
     }
