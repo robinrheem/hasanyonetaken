@@ -9,6 +9,9 @@ class Professor(models.Model):
     top_tags = models.CharField(max_length=255, default=None, blank=True, null=True)
     courses = models.JSONField(default=None, blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.full_name} - {self.department}"
+
 
 class Review(models.Model):
     rating = models.FloatField()
