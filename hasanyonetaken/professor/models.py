@@ -1,27 +1,28 @@
 from django.db import models
 
 class Professor(models.Model):
+    rmp_url = models.CharField(max_length=255)
     full_name = models.CharField(max_length=100)
     university = models.CharField(max_length=200)
     department = models.CharField(max_length=100)
-    ratings = models.JSONField()
-    top_tags = models.CharField(max_length=255)
-    courses = models.JSONField()
+    ratings = models.JSONField(default=None, blank=True, null=True)
+    top_tags = models.CharField(max_length=255, default=None, blank=True, null=True)
+    courses = models.JSONField(default=None, blank=True, null=True)
 
 
 class Review(models.Model):
-    rating = models.IntegerField()
-    difficulty = models.IntegerField()
+    rating = models.FloatField()
+    difficulty = models.FloatField()
     course = models.CharField(max_length=100)
     comment = models.TextField()
     tags = models.CharField(max_length=255)
     helpful = models.IntegerField()
     not_helpful = models.IntegerField()
-    take_again = models.BooleanField()
-    for_credit = models.BooleanField()
-    has_textbook = models.BooleanField()
-    attendance_mandatory = models.BooleanField()
-    grade = models.FloatField()
+    take_again = models.CharField(max_length=100, default=None, blank=True, null=True)
+    for_credit = models.CharField(max_length=100, default=None, blank=True, null=True)
+    has_textbook = models.CharField(max_length=100, default=None, blank=True, null=True)
+    attendance_mandatory = models.CharField(max_length=100, default=None, blank=True, null=True)
+    grade = models.CharField(max_length=100, default=None, blank=True, null=True)
     created_at = models.DateTimeField()
     professor = models.ForeignKey(
         Professor,
