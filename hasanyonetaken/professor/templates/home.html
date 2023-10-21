@@ -3,38 +3,53 @@
 {% block title %}Has Anyone Taken | Home{% endblock %}
 
 {% block content %}
-        <style>
-    /* Additional styles to center the content */
+<style>
+    /* Gradient Background */
     body, html {
         height: 100%;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
+
+
+
+    /* Center Content */
     .center-content {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
     }
-            /* Container for the buttons */
-.top-right-buttons {
-    position: absolute;
-    top: 10px; /* Adjust as needed for desired distance from the top */
-    right: 10px; /* Adjust as needed for desired distance from the right */
-    display: flex;
-    gap: 10px; /* Spacing between buttons */
-}
 
-/* Styling for the buttons */
-.top-right-buttons button,
-.top-right-buttons input[type="submit"] {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-    </style>
- <div class="top-right-buttons">
+    /* Top Right Buttons */
+    .top-right-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 10px;
+    }
+
+    /* Button Styles */
+    .top-right-buttons button,
+    .top-right-buttons input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+
+</style>
+
+<!-- Background Pattern -->
+<div class="background-pattern"></div>
+
+<!-- Top Right Buttons -->
+<div class="top-right-buttons">
     <a href="#" role="button">Sign up</a>
     <a href="#" role="button">Login</a>
-    </div>
+</div>
+
+<!-- Main Content -->
 <div class="grid">
     <form method="POST" action="POST">
         <div class="grid">
@@ -46,4 +61,3 @@
     </form>
 </div>
 {% endblock %}
-

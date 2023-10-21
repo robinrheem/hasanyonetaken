@@ -1,8 +1,107 @@
 {% extends "base.html" %}
 
-{% block title %}Has Anyone Taken | {{professor_name}}{% endblock %}
+{% block title %}Has Anyone Taken | {{ professor_name }}{% endblock %}
 
 {% block content %}
-<div class="grid">
+<style>
+.reviews-container {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 20px;
+}
+ .comment-card {
+     border: 1px solid #ccc;
+     padding: 10px;
+     margin-bottom: 10px;
+     border-radius: 5px;
+}
+ .rating-detail, .class-name {
+     font-weight: bold;
+     margin-top: 10px;
+}
+ .good-reviews, .bad-reviews {
+     padding: 10px;
+     border-radius: 5px;
+}
+ .good-reviews {
+     background-color: #DFFFD6;
+    /* Light green background for good reviews */
+}
+ .bad-reviews {
+     background-color: #FFD6D6;
+    /* Light red background for bad reviews */
+}
+ .header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 20px;
+     background-color: #f0f0f0;
+     border-bottom: 1px solid #ccc;
+}
+ .header-left {
+     display: flex;
+     align-items: center;
+}
+ .header-right {
+     display: flex;
+     align-items: center;
+}
+ .prof-info {
+     display: flex;
+     flex-direction: column;
+     align-i
+</style>
+
+<div class="container">
+    <div class="card">
+        <h2>Reviewer Name</h2>
+        <p>Mean Score: ... (Based on x ratings) </p>
+        <p>Mean Difficulty: ... </p>
+    </div>
+
+    <!-- Filter Fields -->
+    <form class="form-inline">
+        <label for="filterBy">Filter by:</label>
+        <select id="filterBy" name="filterBy" class="form-select">
+            <option value="classes">Classes</option>
+            <option value="tags">Tags</option>
+            <!-- Add more options as needed -->
+        </select>
+        <button type="submit" class="btn">Apply Filter</button>
+    </form>
 </div>
+
+<div class="container">
+    <div class="reviews-container">
+        <div class="good-reviews">
+            <h4>Good Reviews (5, 4, 3)</h4>
+            {% for review in reviews %}
+                {% if review.rating >= 3 %}
+                    <div class="comment-card">
+                        <p>{{ review.comment }}</p>
+                        <p class="rating-detail">Rating: {{ review.rating }} </p>
+                        <p class="rating-detail">Difficulty: {{ review.difficulty }}</p>
+                        <p class="class-name">Class: {{ review.class_name }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="bad-reviews">
+            <h4>Bad Reviews (2, 1)</h4>
+            {% for review in reviews %}
+                {% if review.rating < 3 %}
+                    <div class="comment-card">
+                        <p>{{ review.comment }}</p>
+                        <p class="rating-detail">Rating: {{ review.rating }} </p>
+                        <p class="rating-detail">Difficulty: {{ review.difficulty }}</p>
+                        <p class="class-name">Class: {{ review.class_name }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}
