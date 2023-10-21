@@ -51,11 +51,11 @@
 
 <!-- Main Content -->
 <div class="grid">
-    <form method="POST" action="POST">
+    <form method="GET" action="{% url 'search' %}">
         <div class="grid">
             <label for="professorname">
             <h1>Has anyone taken</h1>
-            <input type="search" id="professorname" name="professorname" placeholder="Professor name" required>
+            <input type="search" id="professorname" name="full_name" placeholder="Professor name" required>
             </label>
         </div>
     </form>
