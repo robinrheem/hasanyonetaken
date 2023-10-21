@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Has Anyone Taken | {{ professor_name }}{% endblock %}
+{% block title %}Has Anyone Taken | {{ professor.full_name }}{% endblock %}
 
 {% block content %}
 <style>
@@ -55,13 +55,14 @@
 
 <div class="container">
     <div class="card">
-        <h2>Reviewer Name</h2>
-        <p>Mean Score: ... (Based on x ratings) </p>
-        <p>Mean Difficulty: ... </p>
+        <h2>{{professor.full_name}}</h2>
+        <h3>{{professor.department}} Department @ {{professor.university}}</h2>
+        <p>Mean Rating: {{mean_rating|floatformat:1}} (Based on {{bad_reviews|length}} ratings) </p>
+        <p>Mean Difficulty: {{mean_difficulty|floatformat:1}} </p>
     </div>
 
     <!-- Filter Fields -->
-    <form class="form-inline">
+    <form class="form-inline" method="GET" action="">
         <label for="filterBy">Filter by:</label>
         <select id="filterBy" name="filterBy" class="form-select">
             <option value="classes">Classes</option>
@@ -76,13 +77,16 @@
     <div class="reviews-container">
         <div class="good-reviews">
             <h4>Good Reviews (5, 4, 3)</h4>
-            {% for review in reviews %}
+            {% for review in good_reviews %}
                 {% if review.rating >= 3 %}
                     <div class="comment-card">
                         <p>{{ review.comment }}</p>
-                        <p class="rating-detail">Rating: {{ review.rating }} </p>
-                        <p class="rating-detail">Difficulty: {{ review.difficulty }}</p>
-                        <p class="class-name">Class: {{ review.class_name }}</p>
+                        <div class="grid">
+                            <p class="rating-detail">Rating: {{ review.rating }} </p>
+                            <p class="rating-detail">Difficulty: {{ review.difficulty }}</p>
+                            <p class="class-name">Class: {{ review.course }}</p>
+                            <p class="class-name">Rated At: {{ review.created_at|date:"Y M j" }}</p>
+                        </div>
                     </div>
                 {% endif %}
             {% endfor %}
@@ -90,13 +94,16 @@
 
         <div class="bad-reviews">
             <h4>Bad Reviews (2, 1)</h4>
-            {% for review in reviews %}
+            {% for review in bad_reviews %}
                 {% if review.rating < 3 %}
                     <div class="comment-card">
                         <p>{{ review.comment }}</p>
-                        <p class="rating-detail">Rating: {{ review.rating }} </p>
-                        <p class="rating-detail">Difficulty: {{ review.difficulty }}</p>
-                        <p class="class-name">Class: {{ review.class_name }}</p>
+                        <div class="grid">
+                            <p class="rating-detail">Rating: {{ review.rating }} </p>
+                            <p class="rating-detail">Difficulty: {{ review.difficulty }}</p>
+                            <p class="class-name">Class: {{ review.course }}</p>
+                            <p class="class-name">Rated At: {{ review.created_at|date:"Y M j" }}</p>
+                        </div>
                     </div>
                 {% endif %}
             {% endfor %}
